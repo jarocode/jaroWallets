@@ -11,7 +11,7 @@ import { signOut } from "../../store/actions/auth";
 import { landingpage, emailLogin } from "../../userRoutes";
 import AppBtn from "../../components/reusableComponents/AppBtn";
 
-const Header = () => {
+const Header = ({ navGap = "70rem" }) => {
   const { token, email } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -27,46 +27,53 @@ const Header = () => {
   );
   return (
     <Container>
-      <LogoDiv>
-        <AppText
-          value={
-            <span>
-              Jaro<Span>Wallets</Span>
-            </span>
-          }
-          weight="bold"
-          size="2em"
-          top="0"
-          bottom="0"
-        />
-      </LogoDiv>
-      <NavDiv>
-        {!email ? (
-          <AppBtn
-            text="Log In"
-            width="12rem"
-            height="3rem"
-            onClick={() => history.push(emailLogin)}
-          />
-        ) : (
-          <Popover content={content} placement="bottom" trigger="click">
-            <AvatarDiv>
-              <UserAvatar size="medium">
-                {email.charAt(0).toUpperCase()}
-              </UserAvatar>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <AiFillCaretDown />
-              </div>
-            </AvatarDiv>
-          </Popover>
-        )}
-      </NavDiv>
+      <Div>
+        <Inner gap={navGap}>
+          <LogoDiv>
+            <AppText
+              value={
+                <span>
+                  Jaro<Span>Wallets</Span>
+                </span>
+              }
+              weight="bold"
+              size="2em"
+              top="0"
+              bottom="0"
+              pointer
+              onClick={() => history.push(landingpage)}
+            />
+          </LogoDiv>
+          <NavDiv>
+            {!email ? (
+              <AppBtn
+                text="Log In"
+                width="12rem"
+                height="3rem"
+                onClick={() => history.push(emailLogin)}
+                shadow
+              />
+            ) : (
+              <Popover content={content} placement="bottom" trigger="click">
+                <AvatarDiv>
+                  <UserAvatar size="medium">
+                    {email.charAt(0).toUpperCase()}
+                  </UserAvatar>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <AiFillCaretDown />
+                  </div>
+                </AvatarDiv>
+              </Popover>
+            )}
+          </NavDiv>
+        </Inner>
+      </Div>
     </Container>
   );
 };
@@ -81,8 +88,21 @@ const Container = styled.div`
   padding: 1rem 3rem;
   background: ${colors.white}!important;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   box-shadow: rgb(0 0 0 / 10%) 0px 1px 8px 0px !important;
+`;
+
+const Div = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+`;
+const Inner = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: ${(props) => props.gap};
 `;
 
 const LogoDiv = styled.div``;

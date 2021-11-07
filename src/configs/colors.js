@@ -1,6 +1,6 @@
 export default {
   primary: "#0079FF",
-  secondary: "#4A66AC",
+  secondary: "#fff",
   black: "#000",
   white: "#fff",
   medium: "#666",
@@ -17,7 +17,7 @@ export default {
   borderGrey2: "#c4c4c4",
   checkout: "#F4F9FF",
   chatBlue: "#1A66FF",
-  shadow: "#4003379",
+  shadow: "rgba(0, 121, 255, .6)",
   shadow2: "#00000022",
   shadow3: "rgba(20, 20, 20, 0.1)",
 };

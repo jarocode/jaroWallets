@@ -9,7 +9,7 @@ const AppBtn = ({
   border = "none",
   weight = "600",
   width = "100%",
-  shadow = true,
+  shadow = false,
   background = colors.primary,
   color = colors.white,
   height = "2rem",
@@ -53,5 +53,6 @@ const Btn = styled(Button)`
   font-weight: ${({ weight }) => weight};
   height: ${({ height }) => height};
   border-radius: ${({ radius }) => radius};
-  box-shadow: ${(shadow) => shadow && ` 0px 12px 35px 0px ${colors.shadow}`};
+  box-shadow: ${({ shadow }) =>
+    shadow && ` 0px 12px 35px 0px ${colors.shadow}`};
 `;

@@ -18,7 +18,11 @@ const Index = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   return (
-    <DashboardLayout padding="3rem 3rem" background={colors.white}>
+    <DashboardLayout
+      padding="3rem 3rem"
+      navGap="78rem"
+      background={colors.white}
+    >
       <Container>
         <CreateWalletModal showModal={showModal} setShowModal={setShowModal} />
         {/* <WalletCard /> */}

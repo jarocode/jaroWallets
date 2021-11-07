@@ -3,10 +3,16 @@ import styled from "styled-components";
 
 import Header from "./Header";
 
-const index = ({ children, background, marginTop, userData = null }) => {
+const index = ({
+  children,
+  background,
+  marginTop,
+  userData = null,
+  navGap,
+}) => {
   return (
     <Container background={background}>
-      <Header userData={userData} />
+      <Header userData={userData} navGap={navGap} />
       {children}
     </Container>
   );

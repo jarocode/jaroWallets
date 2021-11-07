@@ -8,11 +8,18 @@ import Sidebar from "./SideBar";
 
 const { Content } = Layout;
 
-const Index = ({ children, padding, background, margin, layoutPad }) => {
+const Index = ({
+  children,
+  padding,
+  background,
+  margin,
+  navGap,
+  layoutPad,
+}) => {
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   return (
     <Wrapper>
-      <Header />
+      <Header navGap={navGap} />
       <Layout>
         {!isMobile && <Sidebar />}
         <Layout style={{ padding: layoutPad ? layoutPad : "0 24px 24px" }}>

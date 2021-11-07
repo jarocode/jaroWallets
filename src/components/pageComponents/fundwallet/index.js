@@ -16,7 +16,11 @@ const Index = () => {
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
 
   return (
-    <DashboardLayout padding="3rem 3rem" background={colors.white}>
+    <DashboardLayout
+      padding="3rem 3rem"
+      background={colors.white}
+      navGap="78rem"
+    >
       <Container>
         <TitleDiv>
           <AppText
