@@ -4,6 +4,14 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./styles/global.css";
 import reportWebVitals from "./reportWebVitals";
+import store from "./store/store";
+import { saveState } from "./utils";
+
+window.onbeforeunload = () => {
+  if (store.getState().auth.email) {
+    saveState(store.getState());
+  }
+};
 
 ReactDOM.render(
   <React.StrictMode>

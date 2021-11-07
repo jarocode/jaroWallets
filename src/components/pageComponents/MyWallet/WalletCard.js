@@ -41,7 +41,7 @@ const WalletCard = ({ transactionMetrix, isMobile }) => {
           <Img src={""} />
           <Inner>
             <P color="#999" bottom="0" size="16px" weight="500">
-              Approved Funds
+              Deposited Funds
             </P>
             <P color={colors.dark} size="26px" weight="700">
               $0
@@ -52,7 +52,7 @@ const WalletCard = ({ transactionMetrix, isMobile }) => {
           <Img src={""} />
           <Inner>
             <P color="#999" bottom="0" size="16px" weight="500">
-              Unapproved Funds
+              Withdrawn Funds
             </P>
             <P color={colors.dark} size="26px" weight="700">
               $0

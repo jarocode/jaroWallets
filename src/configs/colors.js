@@ -17,7 +17,7 @@ export default {
   borderGrey2: "#c4c4c4",
   checkout: "#F4F9FF",
   chatBlue: "#1A66FF",
-  shadow: "#A0790033",
+  shadow: "#4003379",
   shadow2: "#00000022",
   shadow3: "rgba(20, 20, 20, 0.1)",
 };
