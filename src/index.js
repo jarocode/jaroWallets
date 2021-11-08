@@ -6,12 +6,15 @@ import "./styles/global.css";
 import reportWebVitals from "./reportWebVitals";
 import store from "./store/store";
 import { saveState } from "./utils";
+import axiosConfig from "./configs/axiosConfig";
 
 window.onbeforeunload = () => {
   if (store.getState().auth.email) {
     saveState(store.getState());
   }
 };
+
+axiosConfig();
 
 ReactDOM.render(
   <React.StrictMode>

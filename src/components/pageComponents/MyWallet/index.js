@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Tabs, Typography } from "antd";
 import { useQuery } from "react-query";
@@ -8,14 +8,23 @@ import DashboardLayout from "../../../layouts/dashboardLayout";
 import colors from "../../../configs/colors";
 import WalletCard from "./WalletCard";
 import NoWallet from "./NoWallet";
+import { getWallet } from "../../../apis/queries/wallets";
 import device from "../../../configs/mediaQueries";
 import CreateWalletModal from "./CreateWalletModal";
+import WalletTable from "./WalletTable";
 
 const { mobile } = device;
 
 const Index = () => {
   const [showModal, setShowModal] = useState(false);
+  const [tableData, setTableData] = useState();
+  const { data, isLoading } = useQuery(["getWallet"], getWallet);
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  console.log("wallet", data);
+
+  useEffect(() => {
+    if (data?.data) setTableData(data?.data);
+  }, [data?.data]);
 
   return (
     <DashboardLayout
@@ -25,8 +34,10 @@ const Index = () => {
     >
       <Container>
         <CreateWalletModal showModal={showModal} setShowModal={setShowModal} />
-        {/* <WalletCard /> */}
-        <NoWallet setShowModal={setShowModal} />
+        {tableData && (
+          <WalletTable tableData={tableData} setShowModal={setShowModal} />
+        )}
+        {!tableData && !isLoading && <NoWallet setShowModal={setShowModal} />}
       </Container>
     </DashboardLayout>
   );

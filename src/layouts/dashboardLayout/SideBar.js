@@ -3,8 +3,10 @@ import styled from "styled-components";
 import { Menu, Layout, Typography } from "antd";
 import { useHistory } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
+import { FaWallet, FaMoneyCheckAlt } from "react-icons/fa";
+import { AiFillMoneyCollect } from "react-icons/ai";
 
-import { myWallet, fundWallet } from "../../userRoutes";
+import { myWallet, transactions, fundWallet } from "../../userRoutes";
 
 const { Text } = Typography;
 const { SubMenu } = Menu;
@@ -22,16 +24,16 @@ const Sidebar = () => {
         style={{ height: "100%", borderRight: 0, paddingTop: "4rem" }}
       >
         <MenuItem onClick={() => history.push(myWallet)}>
-          <MdDashboard style={{ marginRight: ".5rem" }} />
+          <FaWallet style={{ marginRight: ".5rem" }} />
           <span>My Wallet</span>
         </MenuItem>
-        <MenuItem>
-          <MdDashboard style={{ marginRight: ".5rem" }} />
-          <span>transaction</span>
-        </MenuItem>
         <MenuItem onClick={() => history.push(fundWallet)}>
-          <MdDashboard style={{ marginRight: ".5rem" }} />
+          <FaMoneyCheckAlt style={{ marginRight: ".5rem" }} />
           <span>Fund Wallet</span>
+        </MenuItem>
+        <MenuItem onClick={() => history.push(transactions)}>
+          <AiFillMoneyCollect style={{ marginRight: ".5rem" }} />
+          <span>transaction</span>
         </MenuItem>
       </Menu>
     </Wrapper>

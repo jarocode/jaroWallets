@@ -1,14 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { Form, Select, Input } from "antd";
+import { Form, Select, Input, message } from "antd";
+import { useMutation } from "react-query";
+import { useSelector } from "react-redux";
 
 import colors from "../../../configs/colors";
 import AppBtn from "../../reusableComponents/AppBtn";
 import AppText from "../../reusableComponents/AppText";
+import { fundWallet } from "../../../apis/mutations/wallet";
 
 const FundWalletForm = () => {
-  const onFinish = () => {
-    return null;
+  const [loading, setloading] = useState();
+  const { walletId } = useSelector((state) => state.wallet);
+  const [fundWalletMutate] = useMutation(fundWallet, {
+    onMutate: () => null,
+    onSuccess: (data) => {
+      setloading(false);
+      message.success(data.message);
+    },
+    onError: (error) => {
+      setloading(false);
+      message.error("something went wrong");
+      console.log(error);
+    },
+  });
+  const onFinish = (formDetails) => {
+    fundWalletMutate(formDetails);
   };
   return (
     <Container>
@@ -23,6 +40,7 @@ const FundWalletForm = () => {
               bottom="0"
             />
           }
+          initialValue="NGN"
           name="currency"
           rules={[
             {
@@ -35,6 +53,27 @@ const FundWalletForm = () => {
             <Select.Option value="NGN">NGN</Select.Option>
             <Select.Option value="USD">USD</Select.Option>
           </Select>
+        </FormItem>
+        <FormItem
+          label={
+            <AppText
+              value="Wallet ID"
+              weight="600"
+              size="1.3em"
+              top="0"
+              bottom="0"
+            />
+          }
+          name="wallet_id"
+          initialValue={walletId}
+          rules={[
+            {
+              required: true,
+              message: "wallet id is required",
+            },
+          ]}
+        >
+          <Input placeholder="Enter text" style={{ height: "3rem" }} />
         </FormItem>
         <FormItem
           label={
