@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Tabs, Typography } from "antd";
 import { useQuery } from "react-query";
 import { useMediaQuery } from "react-responsive";
+import { useSelector } from "react-redux";
 
 import DashboardLayout from "../../../layouts/dashboardLayout";
 import colors from "../../../configs/colors";
@@ -14,8 +15,12 @@ import TransactionTable from "./TransactionTable";
 const { mobile } = device;
 
 const Index = () => {
+  const { walletId } = useSelector((state) => state.wallet);
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
-  const { data } = useQuery(["getTransactions"], getTransactions);
+  const { data, isLoading } = useQuery(
+    ["getTransactions", walletId],
+    getTransactions
+  );
   console.log("transactions", data);
   return (
     <DashboardLayout

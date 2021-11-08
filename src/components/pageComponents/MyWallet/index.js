@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Tabs, Typography } from "antd";
 import { useQuery } from "react-query";
+import { useDispatch } from "react-redux";
 import { useMediaQuery } from "react-responsive";
 
 import DashboardLayout from "../../../layouts/dashboardLayout";
@@ -10,6 +11,7 @@ import WalletCard from "./WalletCard";
 import NoWallet from "./NoWallet";
 import { getWallet } from "../../../apis/queries/wallets";
 import device from "../../../configs/mediaQueries";
+import { changeWalletId } from "../../../store/actions/wallet";
 import CreateWalletModal from "./CreateWalletModal";
 import WalletTable from "./WalletTable";
 
@@ -18,12 +20,16 @@ const { mobile } = device;
 const Index = () => {
   const [showModal, setShowModal] = useState(false);
   const [tableData, setTableData] = useState();
+  const dispatch = useDispatch();
   const { data, isLoading } = useQuery(["getWallet"], getWallet);
   const isMobile = useMediaQuery({ query: "(max-width: 1224px)" });
   console.log("wallet", data);
 
   useEffect(() => {
-    if (data?.data) setTableData(data?.data);
+    if (data?.data) {
+      dispatch(changeWalletId(data?.data?.[0]?.wallet_id));
+      setTableData(data?.data);
+    }
   }, [data?.data]);
 
   return (
